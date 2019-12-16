@@ -287,6 +287,7 @@ export default {
     // 后端响应提示
     remind(res) {
       this.$message({
+        showClose: true,
         message: res.data.msg,
         type: res.data.code === 200 ? "success" : "error"
       });

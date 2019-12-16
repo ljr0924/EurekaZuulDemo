@@ -19,7 +19,7 @@
     </update>
 
     <select id="getCount" parameterType="Component" resultType="Integer">
-        select count(1) from components where name = #{name}
+        select count(1) from components where name = #{name} and id != #{id}
     </select>
 </mapper>
 

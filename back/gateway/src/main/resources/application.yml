@@ -1,5 +1,5 @@
 server:
-  port: 8010
+  port: 8080
 
 spring:
   application:
@@ -16,5 +16,4 @@ zuul:
     deleteComponent: /delete/**
     updateComponent: /update/**
     selectComponent: /select/**
-
-
+  prefix: /deepexi-user/api/v1/components

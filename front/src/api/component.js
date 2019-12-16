@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const urlPrefix = 'http://localhost:8010'
+const urlPrefix = 'http://localhost:8080/deepexi-user/api/v1/components'
 
 
 // 获取组件信息
