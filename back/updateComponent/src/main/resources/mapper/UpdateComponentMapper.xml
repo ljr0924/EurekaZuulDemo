@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.liang.mapper.UpdateComponentMapper">
+    <update id="updateComponentStatus" parameterType="List">
+        <foreach collection="list" item="item" open="" close="" separator=";">
+            update components set status = #{item.status} where id = #{item.id}
+        </foreach>
+    </update>
+
+    <update id="updateComponent" parameterType="Component">
+        update components
+        set name     = #{name},
+            category = #{category},
+            version  = #{version},
+            status   = #{status}
+        where id = #{id}
+    </update>
+
+    <select id="getCount" parameterType="Component" resultType="Integer">
+        select count(1) from components where name = #{name}
+    </select>
+</mapper>
+

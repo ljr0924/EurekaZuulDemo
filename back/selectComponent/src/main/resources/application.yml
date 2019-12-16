@@ -1,0 +1,28 @@
+server:
+  port: 8050
+
+spring:
+  application:
+    name: selectComponent
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/components?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: qw123123
+    driver-class-name: com.mysql.jdbc.Driver
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka
+  instance:
+    prefer-ip-address: true
+
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.liang.entity
+pagehelper:
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+  helper-dialect: mysql
