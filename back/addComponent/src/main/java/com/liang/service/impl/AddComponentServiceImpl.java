@@ -14,8 +14,6 @@ public class AddComponentServiceImpl implements AddComponentService {
 
     @Override
     public Integer save(Component component) {
-        System.out.println(addComponentMapper);
-        System.out.println(addComponentMapper.getCount(component));
         if (addComponentMapper.getCount(component).equals(1)) {
             return -1;
         }

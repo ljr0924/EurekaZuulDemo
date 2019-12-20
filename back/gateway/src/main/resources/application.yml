@@ -16,4 +16,4 @@ zuul:
     deleteComponent: /delete/**
     updateComponent: /update/**
     selectComponent: /select/**
-  prefix: /deepexi-user/api/v1/components
+  prefix: /deepexi-user/api/v1/

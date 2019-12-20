@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liang.mapper.ComponentMapper">
+    <!-- 新增组件 -->
+    <insert id="save" parameterType="Component">
+        insert into components(id, name, category, version, status)
+        values (null, #{name}, #{category}, #{version}, #{status})
+    </insert>
+
+    <!-- 查询组件数量 -->
+    <select id="getCount" parameterType="Component" resultType="Integer">
+        select count(1) count from components where name = #{name} and id != #{id}
+    </select>
+
+    <!-- 删除组件，可批量删除 -->
+    <delete id="deleteComponents" parameterType="List">
+        delete from components where id in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <!-- 删除单个组件 -->
+    <delete id="deleteComponent" parameterType="Integer">
+        delete from components where id = #{id}
+    </delete>
+
+    <!-- 查询组件 -->
+    <select id="selectAllComponents" resultType="Component" parameterType="Component">
+        select * from components
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+            <if test="category != null and category != ''">
+                and category like concat('%', #{category}, '%')
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+    </select>
+
+    <!-- 根据ID查询组件 -->
+    <select id="selectComponentById" parameterType="Integer" resultType="Component">
+        select * from components where id = #{id}
+    </select>
+
+    <!-- 批量更新组件状态 -->
+    <update id="updateComponentStatus" parameterType="List">
+        <foreach collection="list" item="item" open="" close="" separator=";">
+            update components set status = #{item.status} where id = #{item.id}
+        </foreach>
+    </update>
+
+    <!-- 更新组件 -->
+    <update id="updateComponent" parameterType="Component">
+        update components
+        set name     = #{name},
+            category = #{category},
+            version  = #{version},
+            status   = #{status}
+        where id = #{id}
+    </update>
+
+</mapper>

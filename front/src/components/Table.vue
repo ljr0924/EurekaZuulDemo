@@ -52,7 +52,7 @@
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button size="mini" @click="openComponentForm(scope.row, title='编辑组件')">编辑</el-button>
-          <el-button size="mini" type="danger" @click="deleteComponents([scope.row])">删除</el-button>
+          <el-button size="mini" type="danger" @click="deleteComponent(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -244,7 +244,27 @@ export default {
       });
     },
 
-    // 删除组件
+    // 删除单个组件
+    deleteComponent(id) {
+      this.$confirm("是否删除该组件, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        componentApi.deleteComponent(id).then(res => {
+          // eslint-disable-next-line no-console
+          console.log(res);
+          if (res.data.code === 200) {
+            this.tableData = this.tableData.filter(val => {
+              return val.id == id;
+            });
+          }
+          this.remind(res);
+        });
+      });
+    },
+
+    // 批量删除组件
     deleteComponents(componentList) {
       if (componentList.length === 0) return;
       const data = componentList.map(val => {
@@ -269,8 +289,6 @@ export default {
         });
       });
 
-      // eslint-disable-next-line no-console
-      console.log(data);
     },
 
     // 提交组件表单

@@ -13,8 +13,8 @@ public class DeleteComponentServiceImpl implements DeleteComponentService {
     private DeleteComponentMapper componentMapper;
 
     @Override
-    public Integer deleteComponent(List<String> nameList) {
-        System.out.println(nameList);
-        return componentMapper.delete(nameList);
+    public Integer deleteComponent(List<String> idList) {
+        System.out.println(idList);
+        return componentMapper.delete(idList);
     }
 }
